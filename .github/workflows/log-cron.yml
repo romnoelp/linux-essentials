@@ -1,7 +1,7 @@
 name: Log Time Job
 on:
   schedule:
-    - cron: "*/30 * * * *" 
+    - cron: "* * * * *"
 jobs:
   log_time:
     runs-on: ubuntu-latest
