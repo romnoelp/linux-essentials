@@ -1,7 +1,15 @@
 name: Log Time Job
+
 on:
   schedule:
-    - cron: "* * * * *"
+    - cron: "* * * * *" 
+  workflow_dispatch: 
+    inputs:
+      example_input:
+        description: 'An optional input field for triggering'
+        required: false
+        default: 'default_value'
+
 jobs:
   log_time:
     runs-on: ubuntu-latest
