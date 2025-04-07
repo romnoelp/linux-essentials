@@ -2,13 +2,11 @@ name: Log Time Job
 
 on:
   schedule:
-    - cron: "* * * * *" 
+    - cron: "*/30 * * * *" 
   workflow_dispatch: 
-    inputs:
-      example_input:
-        description: 'An optional input field for triggering'
-        required: false
-        default: 'default_value'
+
+permissions:
+  contents: write  
 
 jobs:
   log_time:
@@ -16,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run logging script
         run: |
@@ -28,4 +28,4 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git add log.txt
           git commit -m "Update log file with new timestamp and username" || echo "No changes to commit"
-          git push
+          git push https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/romnoelp/linux-essentials.git
